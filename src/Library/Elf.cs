@@ -9,7 +9,7 @@ namespace Library
 {
     public class Elf
     {
-
+        private int totalHealings = 5;
         public double Lives { get; private set; }
         public string Name { get; set;}
         public List<Item> Items { get; set; }
@@ -37,8 +37,6 @@ namespace Library
                 return totalAttack;
             }
         }
-
-        private int totalHealings = 5;
 
         public Elf (string name, List<Item> items)
         {
@@ -158,6 +156,5 @@ namespace Library
                 totalHealings -= 1;
             }
         }
-
     }
 }

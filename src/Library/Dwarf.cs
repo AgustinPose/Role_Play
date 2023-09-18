@@ -57,24 +57,15 @@ namespace Library
 
         public double GetAttackValue()
         {
-
-            double attack = 0;
-            foreach (var item in Items)
-            {
-                attack += item.AttackValue;
-            }
-            return attack;
+            return this.TotalDefense;
         }
 
         public double GetDefenseValue()
         {
-            double defense = 0;
-            foreach (var item in Items)
-            {
-                defense += item.DefenseValue;
-            }
-            return defense;
+            return this.TotalAttack;
         }
+
+        
         public void AttackWizard(Wizard targetWizard)
         {
             double damage = this.TotalAttack;
@@ -135,6 +126,7 @@ namespace Library
                 Console.WriteLine("Personaje muerto");
             }
         }
+
         public void SetHeal()
         {
             this.Lives = 100;

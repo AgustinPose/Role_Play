@@ -1,13 +1,17 @@
 //Guillermo 
 
 using System.Collections;
+using System.Collections.Generic;
+using Library;
 
 public class Wizard
 {
     private string name;
-    private double lives;
+    public double Lives{ get; private set;}
     private SpellBook spellBook; 
-    private ArrayList items;
+    public List<Mace> Items{ get; private set; } 
+
+
 
 
     // Es imposible dejar esto funcionando por ahora porque no puedo obtener el item.AttackValue 
@@ -54,27 +58,26 @@ public class Wizard
     // Esto es muy poco útil porque tendria que crear uno por cada objeto
     public void AddMaceToItems(Mace mace)
     {
-        items.Add(mace);
+        Items.Add(mace);
     }
 
     public void TakeDamage(double amount) 
     {
         // Se puede checkear que el amount sea un valor valido
-        lives -= amount;
+        this.Lives -= amount;
         // Acá se puede checkear que si la vida es menor o igual a cero, muere
     }
 
-    public void Heal(int amount) 
-    {
-        // Se puede checkear que el amount sea un valor valido
-        lives += amount;
-    }
 
     public double GetKnowledgeLevel()
     {
         return spellBook.SpellAmount;
     }
 
+    public void SetHeal()
+    {
+        this.Lives = 100;
+    }
     
 
 }

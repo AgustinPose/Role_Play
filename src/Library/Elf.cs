@@ -38,6 +38,8 @@ namespace Library
             }
         }
 
+        private int totalHealings = 5;
+
         public Elf (string name, List<Item> items)
         {
             this.Name = name;
@@ -125,6 +127,24 @@ namespace Library
             targetDwarf.TakeDamage(damage);
         }
 
+
+        public void HealWizard(Wizard wizard)
+        {
+            if (totalHealings > 0)
+            {
+                wizard.SetHeal();
+                totalHealings -= 1;
+            }
+        }
+
+        public void HealDwarf(Dwarf dwarf)
+        {
+            if (totalHealings > 0)
+            {
+                dwarf.SetHeal();
+                totalHealings -= 1;
+            }
+        }
 
     }
 }

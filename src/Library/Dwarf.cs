@@ -151,6 +151,10 @@ namespace Library
                 Console.WriteLine("Personaje muerto");
             }
         }
+        public void SetHeal()
+        {
+            this.Lives = 100;
+        }
 
 
     }

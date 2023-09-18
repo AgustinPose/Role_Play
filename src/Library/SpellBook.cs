@@ -2,5 +2,5 @@
 
 public class SpellBook
 {
-    public int spellAmount {get; private set;} = 6;
+    public double SpellAmount {get; private set;} = 6;
 }

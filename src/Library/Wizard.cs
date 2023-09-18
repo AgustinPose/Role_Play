@@ -5,7 +5,7 @@ using System.Collections;
 public class Wizard
 {
     private string name;
-    private int lives;
+    private double lives;
     private SpellBook spellBook; 
     private ArrayList items;
 
@@ -57,7 +57,7 @@ public class Wizard
         items.Add(mace);
     }
 
-    public void TakeDamage(int amount) 
+    public void TakeDamage(double amount) 
     {
         // Se puede checkear que el amount sea un valor valido
         lives -= amount;
@@ -70,9 +70,9 @@ public class Wizard
         lives += amount;
     }
 
-    public int GetKnowledgeLevel()
+    public double GetKnowledgeLevel()
     {
-        return spellBook.spellAmount;
+        return spellBook.SpellAmount;
     }
 
     

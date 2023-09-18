@@ -8,15 +8,41 @@ namespace Library
 {
     public class Dwarf
     {
-        private double lives = 100;
-        public double Lives { get => lives; }
+        //private double lives = 100;
+        public double Lives { get; private set; }
         public string Name { get; set; }
         public ArrayList Items { get; set; }
+
+        public double TotalDefense
+        {
+            get 
+            {
+                double totalDefense = 0;    
+                foreach(Item item in Items)
+                {
+                    totalDefense += item.DefenseValue;
+                }
+                return totalDefense;   
+            }
+        }
+        private double TotalAttack
+        {
+            get
+            {
+                double totalAttack = 0;
+                foreach(Item item in Items)
+                {
+                    totalAttack += item.AttackValue;
+                }
+                return totalAttack;
+            }
+        }
 
         public Dwarf(string name, ArrayList items)
         {
             this.Name = name;
             this.Items = items;
+            this.Lives = 150;
         }
 
         public void AddItem(object newItem)
@@ -78,27 +104,54 @@ namespace Library
             }
         }*/
 
-        private void ReceiveDamage(double damage)
+        //private void ReceiveDamage(double damage)
+       // {
+         //   lives -= damage;
+//
+  //          if (lives < 0)
+    //        {
+      //          lives = 0; // Para evitar valores negativos
+        //    }
+        //}
+       public void TakeDamage(double amount) 
         {
-            lives -= damage;
-
-            if (lives < 0)
+            double defense = this.TotalDefense;
+            if (amount < defense)
             {
-                lives = 0; // Para evitar valores negativos
+                double currentDefense;
+                foreach(Item item in Items)
+                {
+                    currentDefense = item.DefenseValue;
+                    if(amount >= currentDefense)
+                    {
+                    
+                        amount -= currentDefense;
+                        Items.Remove(item);
+                    }
+                    else
+                    {
+                        item.DefenseValue -= amount;
+                    }
+                    if (amount == 0)
+                    {
+                        
+                        break;
+                    }
+                }
+            } else if (amount > defense)
+            {
+                amount -= defense;
+                Lives -= amount;
+            }
+
+            
+            // Sé que el que esto esté acá está mal por donde lo mires, pero no se dónde ponerlo
+            if (Lives <= 0)
+            {
+                Console.WriteLine("Personaje muerto");
             }
         }
 
 
-        public void Heal(int heal)
-        {
-            if (lives + heal <= 100)
-            {
-                lives += heal;
-            }
-            else
-            {
-                lives = 100; // Limitamos la vida máxima a 100
-            }
-        }
     }
 }

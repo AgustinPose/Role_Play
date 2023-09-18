@@ -1,7 +1,9 @@
 //Guillermo 
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Library;
 
 public class Wizard
@@ -24,62 +26,70 @@ public class Wizard
     // Es imposible dejar esto funcionando por ahora porque no puedo obtener el item.AttackValue 
     //de objetos de una lista genérica
 
-    // public int GetTotalAttack()
-    // {
-    //     int attack = 0;
-    //     foreach (var item in items)
-    //     {
-    //         attack += item.AttackValue;
-    //     }
-    //     return attack;
-    // }
+    public double GetTotalAttack()
+    {
+        double attack = 0;
+        foreach (var item in Items)
+        {
+            attack += item.AttackValue;
+        }
+        return attack;
+    }
 
-    // public int GetTotalDefense()
-    // {
-    //     int defense = 0;
-    //     foreach (var item in items)
-    //     {
-    //         defense += item.DefenseValue;
-    //     }
-    //     return defense;
-    // }
+    public double GetTotalDefense()
+    {
+        double defense = 0;
+        foreach (var item in Items)
+        {
+            defense += item.DefenseValue;
+        }
+        return defense;
+    }
 
 // Esto no funciona todavia porque faltan algunas clases
 
-    // public void AttackDwarf(Dwarf dwarf) 
-    // {
-    //     dwarf.TakeDamage(GetTotalAttack());
-    // }
+    public void AttackDwarf(Dwarf dwarf) 
+    {
+        dwarf.TakeDamage(GetTotalAttack());
+    }
 
-    // public void AttackWizard(Wizard wizard)
-    // {
-    //     wizard.TakeDamage(GetTotalAttack());
-    // }
+    public void AttackWizard(Wizard wizard)
+    {
+        wizard.TakeDamage(GetTotalAttack());
+    }
 
-    // public void AttackElf(Elf elf)
-    // {
-    //     elf.TakeDamage(GetTotalAttack());
-    // }
-
-    
+    public void AttackElf(Elf elf)
+    {
+        elf.TakeDamage(GetTotalAttack());
+    }
 
     public void TakeDamage(double amount) 
     {
-        // Se puede checkear que el amount sea un valor valido
+        // Si el valor no es valido, me voy
+        if (amount <= 0)
+            return;
+
         this.Lives -= amount;
-        // Acá se puede checkear que si la vida es menor o igual a cero, muere
+        CheckDeath();
     }
 
-
-    public double GetKnowledgeLevel()
+    public void CheckDeath()
     {
-        return spellBook.SpellAmount;
+        if (this.Lives <= 0)
+        {
+            //Muere
+            Console.WriteLine($"{this.Name} ha muerto");
+        }
     }
 
-    public void SetHeal()
+    public void Heal()
     {
         this.Lives = 100;
     }
     
+    public double GetKnowledgeLevel() // ----- EXCLUSIVO DE WIZARD
+    {
+        return spellBook.SpellAmount;
+    }
 
 }

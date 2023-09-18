@@ -6,12 +6,19 @@ using Library;
 
 public class Wizard
 {
-    private string name;
-    public double Lives{ get; private set;}
     private SpellBook spellBook; 
-    public List<Mace> Items{ get; private set; } 
+    public double Lives { get; private set; }
+    public string Name { get; private set;}
+    public List<Item> Items { get; private set; }
 
-
+    public Wizard (string name, List<Item> items, SpellBook spellBook)
+    {
+        this.Name = name;
+        this.Items = items;
+        this.Lives = 100;
+        this.spellBook = spellBook;
+    }
+        
 
 
     // Es imposible dejar esto funcionando por ahora porque no puedo obtener el item.AttackValue 
@@ -54,12 +61,7 @@ public class Wizard
     //     elf.TakeDamage(GetTotalAttack());
     // }
 
-
-    // Esto es muy poco útil porque tendria que crear uno por cada objeto
-    public void AddMaceToItems(Mace mace)
-    {
-        Items.Add(mace);
-    }
+    
 
     public void TakeDamage(double amount) 
     {

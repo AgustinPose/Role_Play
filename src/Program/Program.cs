@@ -13,6 +13,10 @@ namespace Program
             
             List<Item> itemsManu = new List<Item> {sword, armor};
             Elf elfo = new("Manu", itemsManu);
+
+            
+            List<Item> itemsAgus = new List<Item> {sword, armor};
+            Dwarf dwarf  = new("Agus", itemsAgus);
         }
     }
 }

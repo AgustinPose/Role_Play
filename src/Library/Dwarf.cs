@@ -11,7 +11,7 @@ namespace Library
         //private double lives = 100;
         public double Lives { get; private set; }
         public string Name { get; set; }
-        public ArrayList Items { get; set; }
+        public List<Item> Items { get; set; }
 
         public double TotalDefense
         {
@@ -38,19 +38,19 @@ namespace Library
             }
         }
 
-        public Dwarf(string name, ArrayList items)
+        public Dwarf(string name, List<Item> items)
         {
             this.Name = name;
             this.Items = items;
             this.Lives = 150;
         }
 
-        public void AddItem(object newItem)
+        public void AddItem(Item newItem)
         {
             Items.Add(newItem);
         }
 
-        public void RemoveItem(object item)
+        public void RemoveItem(Item item)
         {
             Items.Remove(item);
         }

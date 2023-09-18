@@ -13,29 +13,24 @@ namespace Library
         public string Name { get; set; }
         public List<Item> Items { get; set; }
 
-        public double TotalDefense
+        public double GetTotalAttack()
         {
-            get
+            double attack = 0;
+            foreach (var item in Items)
             {
-                double totalDefense = 0;
-                foreach (Item item in Items)
-                {
-                    totalDefense += item.DefenseValue;
-                }
-                return totalDefense;
+                attack += item.AttackValue;
             }
+            return attack;
         }
-        private double TotalAttack
+
+        public double GetTotalDefense()
         {
-            get
+            double defense = 0;
+            foreach (var item in Items)
             {
-                double totalAttack = 0;
-                foreach (Item item in Items)
-                {
-                    totalAttack += item.AttackValue;
-                }
-                return totalAttack;
+                defense += item.DefenseValue;
             }
+            return defense;
         }
 
         public Dwarf(string name, List<Item> items)
@@ -55,26 +50,16 @@ namespace Library
             Items.Remove(item);
         }
 
-        public double GetAttackValue()
-        {
-            return this.TotalDefense;
-        }
-
-        public double GetDefenseValue()
-        {
-            return this.TotalAttack;
-        }
-
         
         public void AttackWizard(Wizard targetWizard)
         {
-            double damage = this.TotalAttack;
+            double damage = this.GetTotalAttack();
             targetWizard.TakeDamage(damage);
         }
 
         public void AttackElf(Elf targetElf)
         {
-            double damage = this.TotalAttack;
+            double damage = this.GetTotalAttack();
             targetElf.TakeDamage(damage);
         }
 
@@ -82,14 +67,14 @@ namespace Library
         {
             if (targetDwarf != this)
             {
-                double damage = this.TotalAttack;
+                double damage = this.GetTotalAttack();
                 targetDwarf.TakeDamage(damage);
             }
 
         }
         public void TakeDamage(double amount)
         {
-            double defense = this.TotalDefense;
+            double defense = this.GetTotalDefense();
             if (amount < defense)
             {
                 double currentDefense;
@@ -135,3 +120,4 @@ namespace Library
 
     }
 }
+ 

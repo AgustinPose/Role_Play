@@ -127,6 +127,10 @@ namespace Library
             targetDwarf.TakeDamage(damage);
         }
 
+        public void SetHeal()
+        {
+            this.Lives = 100;
+        }
 
         public void HealWizard(Wizard wizard)
         {
@@ -142,6 +146,15 @@ namespace Library
             if (totalHealings > 0)
             {
                 dwarf.SetHeal();
+                totalHealings -= 1;
+            }
+        }
+
+        public void HealElf(Elf elf)
+        {
+            if (totalHealings > 0)
+            {
+                elf.SetHeal();
                 totalHealings -= 1;
             }
         }

@@ -13,30 +13,6 @@ namespace Library
         public double Lives { get; private set; }
         public string Name { get; set;}
         public List<Item> Items { get; set; }
-        public double TotalDefense
-        {
-            get 
-            {
-                double totalDefense = 0;    
-                foreach(Item item in Items)
-                {
-                    totalDefense += item.DefenseValue;
-                }
-                return totalDefense;   
-            }
-        }
-        private double TotalAttack
-        {
-            get
-            {
-                double totalAttack = 0;
-                foreach(Item item in Items)
-                {
-                    totalAttack += item.AttackValue;
-                }
-                return totalAttack;
-            }
-        }
 
         public Elf (string name, List<Item> items)
         {
@@ -55,19 +31,29 @@ namespace Library
             Items.Remove(currentItem);
         }
 
-        public double GetAttackValue()
+        public double GetTotalAttack()
         {
-            return this.TotalDefense;
+            double attack = 0;
+            foreach (var item in Items)
+            {
+                attack += item.AttackValue;
+            }
+            return attack;
         }
 
-        public double GetDefenseValue()
+        public double GetTotalDefense()
         {
-            return this.TotalAttack;
+            double defense = 0;
+            foreach (var item in Items)
+            {
+                defense += item.DefenseValue;
+            }
+            return defense;
         }
 
         public void TakeDamage(double amount) 
         {
-            double defense = this.TotalDefense;
+            double defense = GetTotalDefense();
             if (amount < defense)
             {
                 double currentDefense;
@@ -95,18 +81,11 @@ namespace Library
                 amount -= defense;
                 Lives -= amount;
             }
-
-            
-            // Sé que el que esto esté acá está mal por donde lo mires, pero no se dónde ponerlo
-            if (Lives <= 0)
-            {
-                Console.WriteLine("Personaje muerto");
-            }
         }
 
         public void AttackWizard(Wizard targetWizard)
         {
-            double damage = this.TotalAttack;
+            double damage = GetTotalAttack();
             targetWizard.TakeDamage(damage);
         }
 
@@ -114,18 +93,18 @@ namespace Library
         {
             if (targetElf != this)
             {
-                double damage = this.TotalAttack;
+                double damage = GetTotalDefense();
                 targetElf.TakeDamage(damage);
             }
         }
 
         public void AttackDwarf(Dwarf targetDwarf)
         {
-            double damage = this.TotalAttack;
+            double damage = GetTotalAttack();
             targetDwarf.TakeDamage(damage);
         }
 
-        public void SetHeal()
+        public void Heal()
         {
             this.Lives = 100;
         }
@@ -134,7 +113,7 @@ namespace Library
         {
             if (totalHealings > 0)
             {
-                wizard.SetHeal();
+                wizard.Heal();
                 totalHealings -= 1;
             }
         }
@@ -152,8 +131,17 @@ namespace Library
         {
             if (totalHealings > 0)
             {
-                elf.SetHeal();
+                elf.Heal();
                 totalHealings -= 1;
+            }
+        }
+
+        public void CheckDeath()
+        {
+            if (this.Lives <= 0)
+            {
+                //Muere
+                Console.WriteLine($"{this.Name} ha muerto");
             }
         }
     }
